@@ -2,8 +2,9 @@ version: '3'
 
 services:
   web:
-    build: ./source
+    build: ./vuln
     ports:
-      - "8000:80"
+      - "1800:80"
     volumes:
-      - ./source:/var/www/html
+      - ./vuln:/var/www/html
+
