@@ -152,18 +152,6 @@
     <p>&copy; 2024 Shopping Clothes. All rights reserved.</p>
   </footer>
   <script>
-    function redirectToFullImage(id) {
-      var url = "https://localhost:1000/id=" + id; 
-      window.location.href = url;
-    }
-    window.onload = function() {
-      var images = document.querySelectorAll('.product-image');
-      images.forEach(function(image, index) {
-        image.onclick = function() {
-          redirectToFullImage(index + 1);
-        };
-      });
-    };
   </script>
 </body>
 </html>
