@@ -1,0 +1,18 @@
+FROM php:8.0-apache
+
+WORKDIR /var/www/html/
+
+COPY ./source .
+
+RUN chown -R root:www-data /var/www/html
+RUN chmod 777 /var/www/html
+
+RUN chown -R root:www-data /var/www/html/files/avatars
+RUN chmod 777 /var/www/html/files/avatars
+
+RUN find . -type f -exec chmod 640 {} \;
+RUN find . -type d -exec chmod 750 {} \;
+
+RUN echo "BOYS{TAKE_YOUR_FLAG}" > /secret.txt
+
+RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
