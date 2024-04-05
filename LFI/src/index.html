@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookWorm - Online Book Reader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">BookWorm</a>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Authors</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to BookWorm</h1>
+        <p>Explore our vast collection of books and dive into the world of literature.</p>
+        <form id="readForm">
+            <input type="text" id="filePath" name="file" placeholder="Enter book file path" />
+            <input type="submit" value="Read" />
+        </form>
+        <div id="book-list">
+            <h2>Available Books</h2>
+            <ul id="books">
+                <li>book1.txt</li>
+                <li>book2.md</li>
+                <li>book3.txt</li>
+            </ul>
+        </div>
+        <div id="book-content">
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 BookWorm. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

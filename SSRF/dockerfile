@@ -1,0 +1,12 @@
+FROM php:7.3-apache
+WORKDIR /var/www/html/
+COPY ./src .
+
+RUN chown -R root:www-data /var/www/html && chmod 755 /var/www/html
+
+RUN find . -type f -exec chmod 640 {} \;
+RUN find . -type d -exec chmod 755 {} \;
+
+RUN chmod +t -R /var/www/html/
+
+RUN echo "PHOLAC{Y3u_g0T_1He_F7a9}" >> /etc/passwd

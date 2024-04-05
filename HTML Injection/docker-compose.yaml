@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build: ./
+    restart: unless-stopped
+    ports:
+      - "4001:80"
+    volumes:
+      - ./src:/var/www/html/
+

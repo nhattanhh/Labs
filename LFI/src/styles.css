@@ -1,0 +1,146 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #999595;
+    background-image: url('https://www.netcov.com/wp-content/pubfiles/2022/07/shutterstock_1092829541.jpg');
+}
+header {
+    background-image: url('https://www.genetec.com/binaries/content/gallery/illustrationstock_cyberthreats-recolored_adobestock_422696329.jpg'); 
+    background-size: cover;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    color: #eeeaea;
+    text-decoration: none;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-image: url('https://www.genetec.com/binaries/content/gallery/illustrationstock_cyberthreats-recolored_adobestock_422696329.jpg');
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #e8ecf0;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+form {
+    margin-bottom: 2rem;
+    display: flex;
+}
+
+input[type="text"] {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    flex-grow: 1;
+    border: 2px solid #ff9a9e;
+    border-radius: 4px 0 0 4px;
+    background-color: #fff8f8;
+}
+
+input[type="submit"] {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    background-color: #ff6b6b;
+    color: #614a4a;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+#book-content {
+    white-space: pre-wrap;
+    font-family: 'Merriweather', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgb(113, 106, 106)7d7;
+    background-color: #f7f7f7;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word; 
+    overflow: auto;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #f2ebeb;
+    text-align: center;
+    padding: 0px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+#book-list {
+    margin-top: 2rem;
+}
+
+#book-list h2 {
+    font-size: 2rem;
+    color: #ebe5e5;
+    margin-bottom: 1rem;
+}
+
+#books {
+    list-style-type: none;
+    padding: 0;
+}
+
+#books li {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#books li:hover {
+    background-color: #e0e0e0;
+}
