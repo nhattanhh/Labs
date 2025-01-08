@@ -1,0 +1,520 @@
+Link list
+
+#include<iostream>
+#include<string>
+using namespace std;
+struct Car{
+    char id;
+    int capacity;
+    int reserved; 
+    Car* next;
+    Car(char idd, int capacityy,int reserved){
+        id=idd;
+        capacity=capacityy;
+        this->reserved=reserved;
+        this->next=NULL;
+    }
+};
+typedef struct Car* car;
+void addCar(car &a,char id,int capacity,int reserved) {
+    if(reserved>capacity)return;
+    car newCar=new Car(id,capacity,reserved);
+    if(a==NULL)a=newCar;
+    else{car b=a;
+         while(b->next!=NULL)b=b->next;
+         b->next = newCar;
+    }
+}
+void removeEmptyCars(car &head){
+    while(head!=NULL&&head->reserved==0)head=head->next;
+    car current=head;
+    while(current!=NULL&&current->next!=NULL){
+        if(current->next->reserved==0)current->next=current->next->next; 
+        else{
+            current=current->next;
+        }
+    }
+}
+void display(car &head){
+    if(head==NULL)return;
+    car current=head;
+    while(current!=NULL){
+        cout<<"Car ID: "<<current->id<<", Capacity: "<<current->capacity<<", Reserved: " << current->reserved<<endl;
+        current=current->next;
+    }
+}
+int countCars(car head){
+    int count=0;
+    car current=head;
+    while(current!=NULL) {
+        count++;
+        current=current->next;
+    }
+    return count;
+}
+
+int main(){
+    car train=NULL;
+    addCar(train, 'A', 50, 0);
+    addCar(train, 'E', 60, 0); 
+    addCar(train, 'D', 440, 30);
+    addCar(train, 'C', 40, 10);
+    addCar(train, 'S', 60, 54);
+    addCar(train, 'G', 70, 0);
+    addCar(train, 'R', 20, 40);
+    addCar(train, 'H', 40, 20);
+    cout << "All cars: "<<endl;
+    display(train);
+    removeEmptyCars(train);
+    cout << "After removing empty cars:"<<endl;
+    display(train);
+    cout << "Number of cars in the train: "<<countCars(train);
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+Queue
+#include <iostream>
+using namespace std;
+struct Item{
+    string name;
+    int quantity;
+    double price;
+    Item(string n,int q,double p){
+        name=n;
+        quantity=q;
+        price=p;
+    }
+    Item(){
+        name="";
+        quantity=0;
+        price=0.0;
+    }
+};
+
+struct Customer{
+    string name,itemName;
+    int quantity;
+    Customer(string n,string p,int q) {
+        name=n;
+        itemName=p;
+        quantity=q;
+    }
+    Customer(){
+        name="";
+        itemName="";
+        quantity=0;
+    }
+};
+
+struct Node{
+    Customer data;
+    Node* next;
+    Node(Customer c){
+        data=c;
+        next=NULL;
+    }
+};
+typedef Node* node;
+struct Queue{
+    node front;
+    node rear; 
+    int size;    
+    Queue(){
+        front=NULL;
+        rear=NULL;
+        size=0;
+    }
+    bool isEmpty(){
+        return front==NULL;
+    }
+    void enqueue(Customer c) {
+        node newNode=new Node(c);
+        if(isEmpty()) {
+            front=rear=newNode;
+        } else{
+            rear->next=newNode;
+            rear=newNode;
+        }
+        size++;
+    }
+    void dequeue(){
+        if(isEmpty()){
+            cout<<"Queue is empty"<<endl;
+            return;
+        }
+        node temp=front;
+        front=front->next;
+        size--;
+        if (front==NULL) {
+            rear=NULL;
+        }
+    }
+    Customer peek(){
+        if (isEmpty()){
+            throw runtime_error("Queue is empty");
+        }
+        return front->data;
+    }
+};
+
+void display(Item arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        Item &item = arr[i];
+        cout<<"Product: "<<item.name<<", Quantity: "<<item.quantity<<", Price: $"<<item.price<<endl;
+    }
+}
+
+void Purchases(Queue &customers,Item arr[],int n) {
+    while (!customers.isEmpty()){
+        Customer dau=customers.peek();
+        customers.dequeue();
+        bool found=false;
+        for (int i=0;i<n;i++) {
+            Item &item=arr[i];
+            if (item.name==dau.itemName) {
+                found=true;
+                if(dau.quantity<=item.quantity) {
+                    item.quantity-=dau.quantity;
+                    cout<<dau.name<<" purchased "<<dau.quantity<<" "<<dau.itemName<<" Remaining: "<<item.quantity<<endl;
+                } else {
+                    cout<<dau.name<<" cannot buy "<<dau.quantity<<" "<<dau.itemName<<" Not enough stock.\n";
+                }
+                break;
+            }
+        }
+        if(!found)cout<<dau.name<<" requested invalid item: "<<dau.itemName<<endl;
+    }
+}
+
+int main(){
+    Item arr[3];
+    arr[0]=Item("Laptop", 10, 1000.0);
+    arr[1]=Item("Phone", 20, 500.0);
+    arr[2]=Item("Headphones", 15, 100.0);
+    Queue customers;
+    cout<<"All items:"<<endl;
+    display(arr, 3);
+    cout<<endl;
+    customers.enqueue(Customer("Hai","Laptop",15));
+    customers.enqueue(Customer("Tung","Headphones",10));
+    customers.enqueue(Customer("Quoc","Phone",4));
+    customers.enqueue(Customer("Trung","Tablet",6));
+    Purchases(customers,arr,3);
+    cout<<endl;
+    if(customers.isEmpty())cout<<"Queue is empty"<<endl<<endl;
+    cout<< "Product left:"<<endl;
+    display(arr, 3);
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+Stack
+#include<iostream>
+using namespace std;
+struct Website{
+    string url,title;
+    Website(string u,string t){
+    url=u;
+    title=t;
+    }
+    Website(){
+        url="";
+        title="";
+    }
+};
+
+struct Node{
+    Website data;
+    Node* next;
+    Node(Website w){
+    data=w;
+    next=NULL;
+    }
+};
+typedef struct Node* node;  
+struct CustomStack{
+    node topNode;
+    CustomStack(){
+    topNode=NULL;
+    }
+};
+
+bool isEmpty(CustomStack s) {
+    return s.topNode==NULL;
+}
+
+void push(CustomStack &s,Website w){
+    node newNode=new Node(w);
+    newNode->next=s.topNode;
+    s.topNode=newNode;
+}
+
+void pop(CustomStack &s) {
+    if(isEmpty(s)){
+        cout<<"Stack is empty"<<endl;
+        return;}
+    s.topNode=s.topNode->next;
+}
+
+Website top(CustomStack s) {
+    if(isEmpty(s)){cout<<"Stack is empty";}
+    return s.topNode->data;
+}
+
+void display(CustomStack s) {
+    CustomStack temp;
+    while(!isEmpty(s)){
+        Website w=top(s);
+        cout<<w.title<<"("<<w.url<<")"<<endl;
+        push(temp,w);
+        pop(s);
+    }
+    while(!isEmpty(temp)){
+        push(s,top(temp));
+        pop(temp);
+    }
+}
+
+void visitsite(CustomStack &backward,CustomStack &forward,string url,string title) {
+    push(backward,Website(url,title));
+    while (!isEmpty(forward)) pop(forward);
+}
+
+void Backward(CustomStack &backward,CustomStack &forward) {
+    if (!isEmpty(backward)){
+        push(forward,top(backward));
+        pop(backward);
+    }
+}
+
+void Forward(CustomStack &backward,CustomStack &forward) {
+    if (!isEmpty(forward)){
+        push(backward,top(forward));
+        pop(forward);
+    }
+}
+
+int main() {
+    CustomStack backward, forward;
+    visitsite(backward,forward,"google.com","Google");
+    visitsite(backward,forward,"facebook.com","Facebook");
+    visitsite(backward,forward,"youtube.com","YouTube");
+    visitsite(backward,forward,"github.com","Github");
+
+    cout<<"After visit 4 times we have: " <<endl << "- Backward:" << endl;
+    display(backward);
+    cout<<"- Forward:" <<endl;
+    display(forward);
+    cout<<endl;
+
+    Backward(backward, forward);
+    cout<<"After backward first time we have: " <<endl << "- Backward:" << endl;
+    display(backward);
+    cout<<"- Forward:" <<endl;
+    display(forward);
+    cout<<endl;
+
+    Backward(backward, forward);
+    cout<<"After backward 2 times we have: " <<endl << "- Backward:" << endl;
+    display(backward);
+    cout<<"- Forward:" <<endl;
+    display(forward);
+    cout<<endl;
+
+    visitsite(backward,forward,"ctftime.org","ctf");
+    cout<<"Visit another website we have: " <<endl << "- Backward:" << endl;
+    display(backward);
+    cout<<"- Forward:" <<endl;
+    display(forward);
+    cout<<endl;
+
+    Forward(backward, forward);
+    cout<<"After forward 1 time we have: " <<endl << "- Backward:" << endl;
+    display(backward);
+    cout<<"- Forward:" <<endl;
+    display(forward);
+}
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+bubble sort:
+#include <iostream>
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Hoán đổi
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    bubbleSort(arr, n);
+
+    cout << "Bubble Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+insertion sort
+#include <iostream>
+using namespace std;
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        // Dịch các phần tử lớn hơn `key` về sau
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    insertionSort(arr, n);
+
+    cout << "Insertion Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+quick sort
+#include <iostream>
+using namespace std;
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        int pivotIndex = i + 1;
+
+        quickSort(arr, low, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    quickSort(arr, 0, n - 1);
+    cout << "Quick Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+Selection sort:
+#include <iostream>
+using namespace std;
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // Hoán đổi phần tử nhỏ nhất với phần tử đầu
+        int temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+int main() {
+    int arr[] = {29, 10, 14, 37, 13};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    selectionSort(arr, n);
+
+    cout << "Selection Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+Tree
+#include <iostream>
+using namespace std;
+
+// Cấu trúc của một nút trong cây nhị phân
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int value) {
+        data = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+void inOrderTraversal(Node* root) {
+    if (root == nullptr) return;
+    inOrderTraversal(root->left);
+    cout << root->data << " ";
+    inOrderTraversal(root->right);
+}
+
+int main() {
+    Node* root = new Node(10);
+    root->left = new Node(4);
+    root->right = new Node(8);
+    root->left->left = new Node(9);
+    root->left->right = new Node(13);
+    root->right->left = new Node(70);
+    root->right->right = new Node(3);
+    root->left->left->left = new Node(11);
+    root->left->left->right = new Node(12);
+
+    cout << "In-order Traversal: ";
+    inOrderTraversal(root);
+    cout << endl;
+
+
+
+    return 0;
+}
