@@ -14,9 +14,8 @@
     ![alt text](imgs/image.png)
 
 - Look at this code you can see that i have escaped $comment by htmlspecialchars(escaped character function of php): $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8'); 
-- -> So you can't xss that.
 
-- But i hadn't escaped $name. Easiest ways is use script tag: <script>alert(1)</script>
+- Add payload to $name. Easiest ways is use script tag: <script>alert(1)</script>
 ![alt text](imgs/example1.png)
 
 - -> RESULT:
