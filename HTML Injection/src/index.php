@@ -86,7 +86,7 @@
             <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $name = $_POST['name'];
-                $comment = htmlspecialchars($_POST['comment']);
+                $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8'); ;
                 echo "<div class='comment'><p>$name</p> $comment</div>";
             }
             ?>
