@@ -23,6 +23,9 @@
 
 ![alt text](imgs/example2.png)
 
+- With htmlspecialchars:
+    + By converting characters like < and > to &lt; and &gt;, htmlspecialchars ensures that user input cannot create HTML tags or scripts.
+    + Using ENT_QUOTES ensures that quotes are escaped, preventing attackers from breaking out of attributes to inject code (e.g.,onerror="sthg...").
 - Some of effective ways to against XSS include using Content Security Policy (CSP) to restrict script sources.
 - CSP can be deployed via HTTP header or <meta> card, such as:
     + <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';".>(remove .)
