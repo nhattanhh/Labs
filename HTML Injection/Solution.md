@@ -7,19 +7,19 @@
    <img src=x onerror=js-code .>(remove . for payload)
    
 - Many ways to bypass XSS, in case they block script tag, you can use <img src=x onerror=js-code .>(remove . for payload) or if they remove script tag you can use this trick: <scrscriptipt.>(remove .) js-code here </scrscriptipt.>(remove .). (After they remove script tag, this whill be payload: <script> js-code here </script> )
--> Depend on your creative, research ability and experience.
+- -> Depend on your creative, research ability and experience.
 
 - In this labs, this is my basic php code for xss vul:
     
     ![alt text](imgs/image.png)
 
 - Look at this code you can see that i have filltered $comment by htmlspecialchars(filltered function of php): $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8'); 
--> So you can't xss that.
+- -> So you can't xss that.
 
 - But i hadn't filltered $name. Easiest ways is use script tag: <script>alert(1)</script>
 ![alt text](imgs/example1.png)
 
--> RESULT:
+- -> RESULT:
 
 ![alt text](imgs/example2.png)
 
