@@ -6,7 +6,7 @@
    <script> js-code </script>
    <img src=x onerror=js-code .>(remove . for payload)
    
-- Many ways to bypass XSS, in case they block script tag, you can use <img src=x onerror=js-code .>(remove . for payload) or if they remove script tag you can use this trick: <scrscriptipt> js-code here </scrscriptipt.>(remove .). (After they remove script tag, this whill be payload: <script> js-code here </script> )
+- Many ways to bypass XSS, in case they block script tag, you can use <img src=x onerror=js-code .>(remove . for payload) or if they remove script tag you can use this trick: <scrscriptipt.>(remove .) js-code here </scrscriptipt.>(remove .). (After they remove script tag, this whill be payload: <script> js-code here </script> )
 -> Depend on your creative, research ability and experience.
 
 - In this labs, this is my basic php code for xss vul:
