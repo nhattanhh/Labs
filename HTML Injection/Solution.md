@@ -4,9 +4,9 @@
 
 - Mostly this vulnerabitity will run JS code in your website because JS is flexible and it has many ways to exploit, this is some examples:
    <script> js-code </script>
-   <img src=x onerror=js-code >
+   <img src=x onerror=js-code .>(remove . for payload)
    
-- Many ways to bypass XSS, in case they block script tag, you can use <img src=x onerror=js-code > or if they remove script tag you can use this trick: <scrscriptipt> js-code here </scrscriptipt>. (After they remove script tag, this whill be payload: <script> js-code here </script> )
+- Many ways to bypass XSS, in case they block script tag, you can use <img src=x onerror=js-code .>(remove . for payload) or if they remove script tag you can use this trick: <scrscriptipt> js-code here </scrscriptipt>. (After they remove script tag, this whill be payload: <script> js-code here </script> )
 -> Depend on your creative, research ability and experience.
 
 - In this labs, this is my basic php code for xss vul:
@@ -25,6 +25,6 @@
 
 - Some of effective ways to against XSS include using Content Security Policy (CSP) to restrict script sources.
 - CSP can be deployed via HTTP header or <meta> card, such as:
-    + <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+    + <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';".>(remove .)
     + Header in nginx: add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self';";
     + Header in Apache: Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self';"
