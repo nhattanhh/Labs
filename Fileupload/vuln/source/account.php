@@ -15,30 +15,26 @@ $stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->bindValue(1, $user_id, SQLITE3_TEXT);
     $result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
     
-// Handle avatar upload
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['avatar'])) {
-    $upload_dir = "/var/www/html/files/avatars/"; // Directory where avatars will be stored
+    $upload_dir = "/var/www/html/files/avatars/"; 
     $avatar_name = $_FILES['avatar']['name'];
     $avatar_tmp = $_FILES['avatar']['tmp_name'];
     $avatar_size = $_FILES['avatar']['size'];
     $avatar_type = $_FILES['avatar']['type'];
-    // Check if file is an image
     $allowed_types = array('image/jpeg', 'image/png', 'image/gif', 'application/x-php');
     if (!in_array($avatar_type, $allowed_types)) {
         echo "Error: Only JPEG, PNG,GIF,...+1 files are allowed.";
         exit();
     }
     $avatar_filename = uniqid() . '_' . $avatar_name;
-    //$avatar_filename = $avatar_name;
-    // Move uploaded file to destination directory
     if (move_uploaded_file($avatar_tmp, $upload_dir . $avatar_filename)) {
-        // Update user's avatar filename in the database
+        
         $stmt = $db->prepare("UPDATE users SET avatar = ? WHERE id = ?");
         $stmt->bindValue(1, $avatar_filename, SQLITE3_TEXT);
         $stmt->bindValue(2, $user_id, SQLITE3_TEXT);
         $stmt->execute();
         
-        // Fetch updated user data to display
+    
 	$stmt = $db->prepare("SELECT * FROM users WHERE id = ?");
 	$stmt->bindValue(1, $user_id, SQLITE3_TEXT);
 	$result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);

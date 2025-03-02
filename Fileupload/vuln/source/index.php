@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare a statement to retrieve the user's details by username
     $stmt = $db->prepare("SELECT * FROM users WHERE username=:username");
     $stmt->bindValue(':username', $username, SQLITE3_TEXT);
     $result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
