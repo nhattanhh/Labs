@@ -1,1 +1,3 @@
 These labs for research...
+
+Run docker by: docker-compose up
