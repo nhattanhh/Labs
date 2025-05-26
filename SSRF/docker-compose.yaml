@@ -1,11 +1,30 @@
-version: '3'
-
 services:
-  web:
-    build: ./
-    restart: unless-stopped
+  web-vulnerable:
+    build: ./web-vulnerable
     ports:
-      - "4003:80"
-    volumes:
-      - ./src:/var/www/html/
+      - "8080:80"
+    networks:
+      - lab-net
+    depends_on:
+      - internal-service
+      - metadata-service
 
+  internal-service:
+    build: ./internal-service
+    networks:
+      lab-net:
+        aliases:
+          - secret.internal
+
+  metadata-service:
+    build: ./metadata-service
+    networks:
+      lab-net:
+        ipv4_address: 169.254.169.254 
+
+networks:
+  lab-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.0.0/16
