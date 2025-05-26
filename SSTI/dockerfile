@@ -7,9 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-
-RUN echo "CTF{Adv4nc3d_Fl4sk_C0nfig_Pwn!}" > /flag.txt
-
 EXPOSE 5000
 
 CMD ["python", "app.py"]

@@ -7,31 +7,23 @@ import html
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-# --- "Flexible" Command Executor ---
 def flexible_command_executor(command_parts):
     if not isinstance(command_parts, list) or len(command_parts) == 0:
         return "Error: Command must be a list of arguments."
 
     executable = command_parts[0].lower()
     
-    # Filter 1: Vẫn giữ lại danh sách các lệnh cơ bản có thể chạy
-    # Bạn có thể mở rộng danh sách này nếu muốn cho phép nhiều lệnh hơn
-    # Hoặc bỏ hoàn toàn nếu muốn RCE "thuần túy" hơn nữa (nhưng cần cẩn thận)
     allowed_executables = ["cat", "ls", "echo", "uname", "id", "pwd", "find", "grep"]
     if executable not in allowed_executables:
         return f"Error: Executable '{executable}' is not on the allowed list for this interface."
 
-    # Filter 2: Loại bỏ các ký tự/chuỗi nguy hiểm CƠ BẢN trong toàn bộ lệnh
-    # Điều này vẫn quan trọng để tránh command injection phức tạp qua các đối số.
-    dangerous_strings_in_args = ["&", ";", "|", "`", "$(", ")", "&&", "||", ">", "<", "$(("] # Bỏ bớt nc, wget,... để linh hoạt hơn
+    dangerous_strings_in_args = ["&", ";", "|", "`", "$(", ")", "&&", "||", ">", "<", "$(("] 
     for part in command_parts:
         for dangerous in dangerous_strings_in_args:
-            if dangerous in str(part): # Không cần lower() nếu dangerous_strings không có chữ cái
+            if dangerous in str(part): 
                 return f"Error: Command part '{part}' contains a highly restricted character/pattern: '{dangerous}'."
 
     try:
-        # The RCE happens here
-        # Tăng timeout một chút nếu cần cho các lệnh phức tạp hơn
         result = subprocess.run(command_parts, capture_output=True, text=True, timeout=5, check=False)
         
         output = ""
@@ -53,10 +45,9 @@ def flexible_command_executor(command_parts):
     except Exception as e:
         return f"Error during command execution: {str(e)}"
 
-# Đổi tên key trong config cho "phiên bản mới" này (tùy chọn)
 app.config['GENERAL_COMMAND_INTERFACE'] = flexible_command_executor
 app.config['APP_VERSION'] = "2.0.0-RCE_Edition" 
-app.config['WELCOME_MESSAGE'] = "JinjaGuard Systems - RCE Mode Engaged."
+app.config['WELCOME_MESSAGE'] = "flagflag."
 
 SENSITIVE_KEYWORDS = [
     "__class__", "__mro__", "__base__", "__subclasses__", "__globals__", 
@@ -84,7 +75,6 @@ DANGEROUS_PATTERNS = re.compile(
     r"(\{\%)|(\{\#)"
 )
 
-# Sửa lại TARGET_PAYLOAD_REGEX để khớp với key mới 'GENERAL_COMMAND_INTERFACE'
 TARGET_PAYLOAD_REGEX = re.compile(r"\{\{\s*config\s*\[\s*('|\")GENERAL_COMMAND_INTERFACE\1\s*\]\s*\((.*?)\)\s*\}\}", re.IGNORECASE | re.DOTALL)
 SIMPLE_CONFIG_REGEX = re.compile(r"\{\{\s*config\s*\}\}", re.IGNORECASE)
 
