@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinja2 Advanced SSTI Citadel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden; /* To contain animations if any */
+        }
+        .container-main {
+            background-color: rgba(10, 25, 47, 0.85); /* Dark, semi-transparent */
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(253, 187, 45, 0.5);
+            border: 1px solid rgba(253, 187, 45, 0.3);
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+        }
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #fdbb2d; 
+            text-shadow: 0 0 10px #fdbb2d;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .form-control, .form-control:focus {
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            background-color: rgba(0,0,0,0.3);
+            color: #e0e0e0;
+            border: 1px solid #fdbb2d;
+        }
+        .form-control::placeholder {
+            color: #a0a0a0;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #fdbb2d, #b21f1f);
+            border: none;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(253,187,45,0.4);
+        }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(253,187,45,0.7);
+        }
+        .alert-output {
+            margin-top: 25px;
+            border-radius: 0px;
+            padding: 15px;
+            font-size: 0.9rem;
+            text-align: left;
+            background-color: rgba(185, 13, 13, 0.6); 
+            border: 1px solid #00FF41; 
+            color: #333c35; 
+            word-wrap: break-word;
+            white-space: pre-wrap; 
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #bdc3c7;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <div class="logo">🛡️ JinjaGuard</div>
+        <h1>Advanced SSTI Infiltration Test</h1>
+        <p class="text-muted mb-4" style="color: #bdc3c7 !important;">Probe the defenses. Your input is... noted.</p>
+
+        <form method="POST" action="/">
+            <div class="form-group">
+                <input type="text" name="user_input" class="form-control" placeholder="Enter your carefully crafted probe..." value="{{ last_input if last_input else '' }}">
+            </div>
+            <button type="submit" class="btn btn-submit btn-block">Transmit</button>
+        </form>
+
+        {% if output_message %}
+            <div class="alert-output">
+                <p><strong>System Response:</strong></p>
+                <div>{{ output_message|safe }}</div>
+            </div>
+        {% endif %}
+        {% if error_message %}
+             <div class="alert-output" style="border-color: #e74c3c; color: #f5c6cb;">
+                <p><strong>Anomaly Detected:</strong></p>
+                 <div>{{ error_message|safe }}</div>
+            </div>
+        {% endif %}
+        <p class="footer-text">&copy; SecureTech Simulated Environment</p>
+    </div>
+</body>
+</html>
