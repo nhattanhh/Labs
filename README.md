@@ -1,3 +1,3 @@
-These labs for research...
+These labs builds for learning how to exploit vulnerabilities in web applications. The labs are designed to be challenging and require a deep understanding of web application security.
 
-Run docker by: docker-compose up
+Run by: docker-compose up -d
