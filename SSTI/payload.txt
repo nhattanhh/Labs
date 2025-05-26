@@ -1,0 +1,1 @@
+{{ config["GENERAL_COMMAND_INTERFACE"](["cat","/flag.txt"]) }}
