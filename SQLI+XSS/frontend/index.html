@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeShop | Learn to Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-bracket">{</span>
+                <span class="logo-text">CodeShop</span>
+                <span class="logo-bracket">}</span>
+            </a>
+            <div class="nav-links">
+                <a href="#products">Courses</a>
+                <a href="#about">About</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search courses...">
+                    <button class="search-btn">Go</button>
+                </div>
+                <button id="loginBtn" class="btn btn-primary">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="userBanner" class="user-banner hidden">
+        <div class="container">
+            <span id="welcomeMessage"></span>
+            <button id="logoutBtn" class="btn btn-sm">Logout</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">New courses available</div>
+                <h1 class="hero-title">Learn to Code.<br>Build Your Future.</h1>
+                <p class="hero-desc">Premium courses and tools to help you become a better developer. Start learning
+                    today.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg">Browse Courses</button>
+                    <button class="btn btn-outline btn-lg">Free Trial</button>
+                </div>
+            </div>
+            <div class="hero-cards">
+                <div class="preview-card">
+                    <div class="card-badge">Popular</div>
+                    <div class="card-icon">JS</div>
+                    <div class="card-title">JavaScript Mastery</div>
+                    <div class="card-price">$49</div>
+                </div>
+                <div class="preview-card">
+                    <div class="card-badge">New</div>
+                    <div class="card-icon">RX</div>
+                    <div class="card-title">React Complete</div>
+                    <div class="card-price">$79</div>
+                </div>
+                <div class="preview-card">
+                    <div class="card-badge">Best</div>
+                    <div class="card-icon">PY</div>
+                    <div class="card-title">Python for AI</div>
+                    <div class="card-price">$99</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="searchResults" class="section hidden">
+        <div class="container">
+            <h2 class="section-title">Search Results</h2>
+            <p id="searchMessage"></p>
+            <div id="searchResultsGrid" class="products-grid"></div>
+        </div>
+    </section>
+
+    <section id="products" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Catalog</span>
+                <h2 class="section-title">Featured Courses</h2>
+                <p class="section-desc">Hand-picked courses to accelerate your learning</p>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">All</button>
+                <button class="filter-tab" data-category="Frontend">Frontend</button>
+                <button class="filter-tab" data-category="Backend">Backend</button>
+                <button class="filter-tab" data-category="Mobile">Mobile</button>
+                <button class="filter-tab" data-category="Tools">Tools</button>
+            </div>
+
+            <div id="productsGrid" class="products-grid"></div>
+        </div>
+    </section>
+
+    <section id="about" class="section section-alt">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-content">
+                    <span class="section-tag">Why CodeShop</span>
+                    <h2 class="section-title">Learn from the Best</h2>
+                    <p class="about-text">Our courses are created by industry professionals with years of real-world
+                        experience. Get practical skills that employers want.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-num">01</div>
+                            <div>
+                                <h4>Project-Based</h4>
+                                <p>Build real projects, not just follow tutorials</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-num">02</div>
+                            <div>
+                                <h4>Lifetime Access</h4>
+                                <p>Learn at your own pace, forever</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-num">03</div>
+                            <div>
+                                <h4>Certificate</h4>
+                                <p>Earn certificates to showcase skills</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <span class="stat-num">50K+</span>
+                        <span class="stat-label">Students</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num">100+</span>
+                        <span class="stat-label">Courses</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num">4.9</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">Student Reviews</h2>
+                <p class="section-desc">What our community says</p>
+            </div>
+
+            <div class="review-form-box">
+                <h3>Share Your Experience</h3>
+                <form id="reviewForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="reviewerName" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Course</label>
+                            <select id="productSelect" class="form-input" required>
+                                <option value="">Select course...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Review</label>
+                        <textarea id="reviewText" class="form-input" placeholder="Write your review..."
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="rating-select">
+                            <button type="button" class="rating-btn" data-rating="1">*</button>
+                            <button type="button" class="rating-btn" data-rating="2">*</button>
+                            <button type="button" class="rating-btn" data-rating="3">*</button>
+                            <button type="button" class="rating-btn" data-rating="4">*</button>
+                            <button type="button" class="rating-btn active" data-rating="5">*</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Submit Review</button>
+                </form>
+            </div>
+
+            <div id="reviewsContainer" class="reviews-grid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-bracket">{</span>
+                        <span class="logo-text">CodeShop</span>
+                        <span class="logo-bracket">}</span>
+                    </div>
+                    <p>Learn to code. Build your future.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Courses</h4>
+                    <a href="#">Frontend</a>
+                    <a href="#">Backend</a>
+                    <a href="#">Mobile</a>
+                    <a href="#">DevOps</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>2024 CodeShop. All rights reserved. | Security Lab Demo</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-box">
+            <button class="modal-close">X</button>
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+            <div id="loginMessage"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
